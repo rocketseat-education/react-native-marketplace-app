@@ -1,7 +1,7 @@
 {
   "name": "market-place-app",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
@@ -9,12 +9,19 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@arthurrios/biome-config": "^1.1.4",
     "expo": "~54.0.7",
+    "expo-constants": "~18.0.8",
+    "expo-linking": "~8.0.8",
+    "expo-router": "~6.0.4",
     "expo-status-bar": "~3.0.8",
     "react": "19.1.0",
-    "react-native": "0.81.4"
+    "react-native": "0.81.4",
+    "react-native-safe-area-context": "~5.6.0",
+    "react-native-screens": "~4.16.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.2.4",
     "@types/react": "~19.1.0",
     "typescript": "~5.9.2"
   },
