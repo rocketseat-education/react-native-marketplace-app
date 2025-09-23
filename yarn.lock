@@ -1068,7 +1068,7 @@
     postcss "~8.4.32"
     resolve-from "^5.0.0"
 
-"@expo/metro-runtime@^6.1.2", "@expo/metro-runtime@~6.1.2":
+"@expo/metro-runtime@^6.1.2":
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/@expo/metro-runtime/-/metro-runtime-6.1.2.tgz#5a4ff117df6115f9c9d4dcc561065e16d69c078b"
   integrity sha512-nvM+Qv45QH7pmYvP8JB1G8JpScrWND3KrMA6ZKe62cwwNiX/BjHU28Ear0v/4bQWXlOY0mv6B8CDIm8JxXde9g==
@@ -1757,6 +1757,18 @@
   integrity sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==
   dependencies:
     "@sinonjs/commons" "^3.0.0"
+
+"@tanstack/query-core@5.90.2":
+  version "5.90.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.90.2.tgz#ac5d0d0f19a38071db2d21d758b5c35a85d9c1d8"
+  integrity sha512-k/TcR3YalnzibscALLwxeiLUub6jN5EDLwKDiO7q5f4ICEoptJ+n9+7vcEFy5/x/i6Q+Lb/tXrsKCggf5uQJXQ==
+
+"@tanstack/react-query@^5.89.0":
+  version "5.90.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.90.2.tgz#2f045931b7d44bef02c5261fedba75ef1a418726"
+  integrity sha512-CLABiR+h5PYfOWr/z+vWFt5VsOA2ekQeRQBFSKlcoW6Ndx/f8rfyVmq4LbgOM4GG2qtxAxjLYLOpCNTYm4uKzw==
+  dependencies:
+    "@tanstack/query-core" "5.90.2"
 
 "@types/babel__core@^7.1.14":
   version "7.20.5"
@@ -2809,7 +2821,7 @@ expo-modules-core@3.0.18:
   dependencies:
     invariant "^2.2.4"
 
-expo-router@~6.0.4:
+expo-router@~6.0.8:
   version "6.0.8"
   resolved "https://registry.yarnpkg.com/expo-router/-/expo-router-6.0.8.tgz#5d414f05671f6c36aafaecf4e0e7891f646ff161"
   integrity sha512-cx6vFvBrfPNHpNbN2ij2mF5JKE4JXyq+dJVmWNqt7JplA0aohOOKXS/KQ9vQy88HpnrcJMuYqUNHp44aWyce7g==
@@ -2845,7 +2857,7 @@ expo-status-bar@~3.0.8:
   dependencies:
     react-native-is-edge-to-edge "^1.2.1"
 
-expo@~54.0.7:
+expo@~54.0.10:
   version "54.0.10"
   resolved "https://registry.yarnpkg.com/expo/-/expo-54.0.10.tgz#3252cab6d7d1596c4cd2225e28b8d76f271c803e"
   integrity sha512-49+IginEoKC+g125ZlRvUYNl9jKjjHcDiDnQvejNWlMQ0LtcFIWiFad/PLjmi7YqF/0rj9u3FNxqM6jNP16O0w==
@@ -4635,10 +4647,10 @@ react-native-is-edge-to-edge@^1.1.6, react-native-is-edge-to-edge@^1.2.1:
   resolved "https://registry.yarnpkg.com/react-native-is-edge-to-edge/-/react-native-is-edge-to-edge-1.2.1.tgz#64e10851abd9d176cbf2b40562f751622bde3358"
   integrity sha512-FLbPWl/MyYQWz+KwqOZsSyj2JmLKglHatd3xLZWskXOpRaio4LfEDEz8E/A6uD8QoTHW6Aobw1jbEwK7KMgR7Q==
 
-react-native-reanimated@~4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-4.1.0.tgz#dd0a2495b14fa344d7f482131ecae79110fa59cd"
-  integrity sha512-L8FqZn8VjZyBaCUMYFyx1Y+T+ZTbblaudpxReOXJ66RnOf52g6UM4Pa/IjwLD1XAw1FUxLRQrtpdjbkEc74FiQ==
+react-native-reanimated@~4.1.1:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-4.1.2.tgz#d2ab20c575740b29002d115617d6621c83e81c89"
+  integrity sha512-qzmQiFrvjm62pRBcj97QI9Xckc3EjgHQoY1F2yjktd0kpjhoyePeuTEXjYRCAVIy7IV/1cfeSup34+zFThFoHQ==
   dependencies:
     react-native-is-edge-to-edge "^1.2.1"
     semver "7.7.2"
