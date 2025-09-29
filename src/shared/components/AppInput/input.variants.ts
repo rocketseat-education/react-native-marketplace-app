@@ -16,10 +16,16 @@ export const appInputVariants = tv({
       },
     },
     isError: {
-      true: {},
+      true: {
+        wrapper: 'border-danger',
+        label: 'text-danger',
+      },
     },
     isDisabled: {
-      true: {},
+      true: {
+        wrapper: 'opacity-50',
+        input: 'text-gray-300',
+      },
     },
   },
   defaultVariants: {

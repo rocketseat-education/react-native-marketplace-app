@@ -46,7 +46,6 @@ export const AppInput: FC<AppInputProps> = ({
     handleTextChange,
     isFocused,
   } = useAppInputViewModel({
-    error,
     onBlur,
     onFocus,
     isError: !!error,
@@ -56,7 +55,7 @@ export const AppInput: FC<AppInputProps> = ({
     secureTextEntry,
     value,
   })
-  const styles = appInputVariants({ isFocused })
+  const styles = appInputVariants({ isFocused, isDisabled, isError: !!error })
 
   return (
     <View className={styles.container({ className: containerClassName })}>
