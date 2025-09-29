@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native'
 import { AppInputVariantsProps, appInputVariants } from './input.variants'
+import { useAppInputViewModel } from './useAppInputViewModel'
 
 export interface AppInputProps extends TextInputProps, AppInputVariantsProps {
   label?: string
@@ -16,6 +17,7 @@ export interface AppInputProps extends TextInputProps, AppInputVariantsProps {
   rightIcon?: keyof typeof Ionicons.glyphMap
   containerClassName?: string
   mask?: (value: string) => void | string
+  error?: string
 }
 
 export const AppInput: FC<AppInputProps> = ({
@@ -24,9 +26,33 @@ export const AppInput: FC<AppInputProps> = ({
   rightIcon,
   containerClassName,
   mask,
-  className,
+  value,
+  isError,
+  secureTextEntry,
+  onBlur,
+  onFocus,
+  onChangeText,
+  error,
+  isDisabled,
   ...textInputProps
 }) => {
+  const {
+    getIconColor,
+    handleWrapperPress,
+    handlePasswordToggle,
+    handleFocus,
+    handleBlur,
+  } = useAppInputViewModel({
+    error,
+    onBlur,
+    onFocus,
+    isError: !!error,
+    mask,
+    onChangeText,
+    isDisabled,
+    secureTextEntry,
+    value,
+  })
   const styles = appInputVariants()
 
   return (
