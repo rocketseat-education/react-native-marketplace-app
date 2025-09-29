@@ -83,6 +83,12 @@ export const AppInput: FC<AppInputProps> = ({
           <Ionicons size={22} name="eye-off-outline" />
         </TouchableOpacity>
       </Pressable>
+
+      {error && (
+        <Text className={styles.error()}>
+          <Ionicons className="ml-2" name="alert-circle-outline" /> {error}
+        </Text>
+      )}
     </View>
   )
 }
