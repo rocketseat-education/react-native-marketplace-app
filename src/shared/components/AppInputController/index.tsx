@@ -18,8 +18,26 @@ export const AppInputController = <T extends FieldValues>({
   name,
   control,
   errors,
+  ...rest
 }: AppInputControllerProps<T>) => {
   return (
-    <Controller name={name} control={control} render={() => <AppInput />} />
+    <Controller
+      name={name}
+      control={control}
+      render={({
+        field: { onBlur, onChange, value },
+        fieldState: { error },
+        formState: { isSubmitting },
+      }) => (
+        <AppInput
+          onBlur={onBlur}
+          onChangeText={onChange}
+          value={value}
+          error={error?.message}
+          isDisabled={isSubmitting || rest.isDisabled}
+          {...rest}
+        />
+      )}
+    />
   )
 }
