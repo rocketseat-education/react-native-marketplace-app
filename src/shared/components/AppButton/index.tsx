@@ -22,6 +22,7 @@ export const AppButton: FC<AppButtonProps> = ({
   variant = 'filled',
   isLoading,
   isDisabled,
+  className,
   ...rest
 }) => {
   const contentColor =
@@ -51,7 +52,7 @@ export const AppButton: FC<AppButtonProps> = ({
   }
 
   return (
-    <TouchableOpacity className={styles.base()} {...rest}>
+    <TouchableOpacity className={styles.base({ className })} {...rest}>
       {renderContent()}
     </TouchableOpacity>
   )
