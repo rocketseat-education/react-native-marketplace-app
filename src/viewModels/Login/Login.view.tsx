@@ -43,7 +43,7 @@ export const LoginView: FC<ReturnType<typeof useLoginViewModel>> = ({
         <TouchableOpacity onPress={() => router.push('/register')}>
           <Text>Registro</Text>
         </TouchableOpacity>
-        <AppButton />
+        <AppButton>Teste</AppButton>
       </View>
     </KeyboardContainer>
   )
