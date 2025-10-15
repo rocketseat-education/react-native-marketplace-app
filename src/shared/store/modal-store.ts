@@ -11,7 +11,7 @@ interface ModalStore {
   isOpen: boolean
   content: ReactNode | null
   config: ModalConfig
-  open: (content: ReactNode, config: ModalConfig) => void
+  open: (content: ReactNode, config?: ModalConfig) => void
   close: () => void
 }
 
