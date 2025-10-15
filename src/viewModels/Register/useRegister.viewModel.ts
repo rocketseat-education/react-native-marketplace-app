@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
+import { useAppModal } from '../../shared/hooks/useAppModal'
 import { useRegisterMutation } from '../../shared/queries/auth/use-register.mutation'
 import { useUserStore } from '../../shared/store/user-store'
 import { RegisterFormData, registerScheme } from './register.scheme'
@@ -7,6 +8,28 @@ import { RegisterFormData, registerScheme } from './register.scheme'
 export const useRegisterViewModel = () => {
   const userRegisterMutation = useRegisterMutation()
   const { setSession, user } = useUserStore()
+  const modals = useAppModal()
+
+  const handleSelectAvatar = () => {
+    modals.showSelection({
+      title: 'Selecionar foto',
+      message: 'Escolha uma opção:',
+      options: [
+        {
+          text: 'Galeria',
+          icon: 'images',
+          variant: 'primary',
+          onPress: () => alert('Galeria'),
+        },
+        {
+          text: 'Câmera',
+          icon: 'camera',
+          variant: 'primary',
+          onPress: () => alert('Câmera'),
+        },
+      ],
+    })
+  }
 
   const {
     control,
@@ -43,5 +66,6 @@ export const useRegisterViewModel = () => {
     control,
     errors,
     onSubmit,
+    handleSelectAvatar,
   }
 }
