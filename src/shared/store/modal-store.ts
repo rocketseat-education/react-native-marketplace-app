@@ -25,6 +25,7 @@ export const useModalStore = create<ModalStore>((set, get) => ({
   },
   open: (content, config) =>
     set({
+      isOpen: true,
       content,
       config: {
         ...get().config,
