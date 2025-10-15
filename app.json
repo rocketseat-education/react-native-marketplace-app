@@ -15,7 +15,8 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.arthurrios.marketplaceapp"
+      "bundleIdentifier": "com.arthurrios.marketplaceapp",
+      "appleTeamId": "AVJYPRL2JA"
     },
     "android": {
       "adaptiveIcon": {
@@ -28,7 +29,8 @@
       "permissions": [
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.CAMERA"
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
       ]
     },
     "web": {
