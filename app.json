@@ -24,7 +24,12 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.arthurrios.marketplaceapp"
+      "package": "com.arthurrios.marketplaceapp",
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.CAMERA"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,7 +38,15 @@
       "typedRoutes": true
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-font",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Este app precisa acessar sua galeria de fotos para que você possa selecionar e enviar sua foto de perfil.",
+          "cameraPermission": "Este app precisa acessar sua câmera para que você possa tirar fotos para o seu perfil."
+        }
+      ]
     ]
   }
 }
