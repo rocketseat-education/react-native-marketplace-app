@@ -3,39 +3,18 @@ import { useForm } from 'react-hook-form'
 import { useAppModal } from '../../shared/hooks/useAppModal'
 import { useCamera } from '../../shared/hooks/useCamera'
 import { useGallery } from '../../shared/hooks/useGallery'
+import { useImage } from '../../shared/hooks/useImage'
 import { useRegisterMutation } from '../../shared/queries/auth/use-register.mutation'
 import { useUserStore } from '../../shared/store/user-store'
 import { RegisterFormData, registerScheme } from './register.scheme'
 
 export const useRegisterViewModel = () => {
   const userRegisterMutation = useRegisterMutation()
-  const { setSession, user } = useUserStore()
-  const modals = useAppModal()
-  const { openCamera } = useCamera({})
-  const { openGallery } = useGallery({})
+  const { setSession } = useUserStore()
+  const { handleSelectImage } = useImage()
 
-  const handleSelectAvatar = () => {
-    modals.showSelection({
-      title: 'Selecionar foto',
-      message: 'Escolha uma opção:',
-      options: [
-        {
-          text: 'Galeria',
-          icon: 'images',
-          variant: 'primary',
-          onPress: async () => {
-            const imageUri = await openGallery()
-            console.log(imageUri)
-          },
-        },
-        {
-          text: 'Câmera',
-          icon: 'camera',
-          variant: 'primary',
-          onPress: openCamera,
-        },
-      ],
-    })
+  const handleSelectAvatar = async () => {
+    await handleSelectImage()
   }
 
   const {
@@ -66,8 +45,6 @@ export const useRegisterViewModel = () => {
       user: mutationResponse.user,
     })
   })
-
-  console.log(user)
 
   return {
     control,
