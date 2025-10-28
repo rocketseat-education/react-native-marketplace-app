@@ -22,6 +22,7 @@ export interface UserStore {
   setSession: (sessionData: SetSessionParams) => void
   logout: () => void
   updateTokens: (updateTokensParams: UpdateTokensParams) => void
+  updateUser: (updatedUserData: Partial<UserInterface>) => void
 }
 
 export const useUserStore = create<UserStore>()(
@@ -37,6 +38,11 @@ export const useUserStore = create<UserStore>()(
       },
       updateTokens: (updateTokensParams) => {
         set({ ...updateTokensParams })
+      },
+      updateUser: (updatedUserData) => {
+        set((state) => ({
+          user: state.user ? { ...state.user, ...updatedUserData } : null,
+        }))
       },
     }),
     {
