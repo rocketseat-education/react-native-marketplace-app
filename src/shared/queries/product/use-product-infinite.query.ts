@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
+import { buildImageUrl } from '../../helpers/buildImageUrl'
 import { getProducts } from '../../services/product.service'
 
 export const useProductInfiniteQuery = () => {
@@ -33,8 +34,15 @@ export const useProductInfiniteQuery = () => {
     queryKey: ['products'],
   })
 
+  const products = data?.pages
+    .flatMap((page) => page.data)
+    .map((product) => ({
+      ...product,
+      imageUrl: buildImageUrl(product.photo),
+    }))
+
   return {
-    data,
+    products,
     error,
     fetchNextPage,
     hasNextPage,
