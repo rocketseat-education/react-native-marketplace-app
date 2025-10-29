@@ -1,5 +1,13 @@
-import { Text } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
+import { useUserStore } from '../../shared/store/user-store'
 
 export default function Home() {
-  return <Text>Tela de Home</Text>
+  const { logout } = useUserStore()
+  return (
+    <View className="flex-1 items-center justify-center">
+      <TouchableOpacity onPress={logout}>
+        <Text>Logout</Text>
+      </TouchableOpacity>
+    </View>
+  )
 }
