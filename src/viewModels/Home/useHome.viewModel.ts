@@ -31,5 +31,8 @@ export const useHomeViewModel = () => {
     handleRefresh,
     products,
     handleEndReached,
+    isLoading,
+    hasNextPage,
+    isFetchingNextPage,
   }
 }
