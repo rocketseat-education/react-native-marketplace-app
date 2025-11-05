@@ -22,12 +22,14 @@ export const useHomeViewModel = () => {
     await refetch()
   }
 
-  console.log('Data:', JSON.stringify(products, null, 2))
-  console.log('Error:', error)
-  console.log('Is Loading:', isLoading)
+  const handleEndReached = () => {
+    handleLoadMore()
+  }
+
   return {
     handleLoadMore,
     handleRefresh,
     products,
+    handleEndReached,
   }
 }
