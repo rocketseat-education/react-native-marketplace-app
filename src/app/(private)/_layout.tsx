@@ -1,4 +1,5 @@
 import { Redirect, Stack } from 'expo-router'
+import { AppBottomSheet } from '../../shared/components/AppBottomSheet'
 import { useUserStore } from '../../shared/store/user-store'
 
 export default function PrivateLayout() {
@@ -9,8 +10,11 @@ export default function PrivateLayout() {
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Stack>
+    <>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
+      <AppBottomSheet />
+    </>
   )
 }
