@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons'
+import { Checkbox } from 'expo-checkbox'
 import { FC } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { AppButton } from '../../../../shared/components/AppButton'
@@ -42,6 +43,25 @@ export const FilterView: FC<ReturnType<typeof useFilterViewModel>> = ({
         </View>
 
         <Text className="font-semibold text-base text-gray-300">CATEGORIA</Text>
+
+        {isLoading ? (
+          <Text>Carregando categorias...</Text>
+        ) : (
+          <View className="mb-6 gap-3">
+            {productCategories?.map(({ name, id }) => (
+              <TouchableOpacity
+                className="flex-row items-center py-2"
+                key={`product-category-${id}`}
+              >
+                <Checkbox
+                  color={colors['purple-base']}
+                  className="mr-3 rounded-full"
+                />
+                <Text className="text-base text-gray-400">{name}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
 
         <View className="flex-row gap-3 mt-4 mb-6">
           <View className="flex-1">
