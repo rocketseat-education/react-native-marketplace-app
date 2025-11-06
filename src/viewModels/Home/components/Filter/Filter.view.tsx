@@ -1,12 +1,16 @@
 import { Ionicons } from '@expo/vector-icons'
 import { FC } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
-import { colors } from '../../../styles/colors'
-import { AppButton } from '../AppButton'
-import { AppInput } from '../AppInput'
+import { AppButton } from '../../../../shared/components/AppButton'
+import { AppInput } from '../../../../shared/components/AppInput'
+import { colors } from '../../../../styles/colors'
 import { useFilterViewModel } from './useFilter.viewModel'
 
-export const FilterView: FC<ReturnType<typeof useFilterViewModel>> = () => {
+export const FilterView: FC<ReturnType<typeof useFilterViewModel>> = ({
+  productCategories,
+  isLoading,
+}) => {
+  console.log(productCategories)
   return (
     <View>
       <View className="flex-row items-center justify-between py-4 px-6">
