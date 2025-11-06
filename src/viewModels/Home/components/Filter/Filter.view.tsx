@@ -10,8 +10,11 @@ import { useFilterViewModel } from './useFilter.viewModel'
 export const FilterView: FC<ReturnType<typeof useFilterViewModel>> = ({
   productCategories,
   isLoading,
+  handleValueMaxChange,
+  handleValueMinChange,
+  handleCategoryToggle,
+  selectedCategories,
 }) => {
-  console.log(productCategories)
   return (
     <View>
       <View className="flex-row items-center justify-between py-4 px-6">
@@ -28,6 +31,7 @@ export const FilterView: FC<ReturnType<typeof useFilterViewModel>> = ({
         <View className="flex-row mb-4 w-full">
           <View className="flex-1">
             <AppInput
+              onChangeText={(text) => handleValueMinChange(Number(text))}
               placeholder="De"
               keyboardType="numeric"
               containerClassName="w-[90%]"
@@ -35,6 +39,7 @@ export const FilterView: FC<ReturnType<typeof useFilterViewModel>> = ({
           </View>
           <View className="flex-1">
             <AppInput
+              onChangeText={(text) => handleValueMaxChange(Number(text))}
               placeholder="Até"
               keyboardType="numeric"
               containerClassName="w-[90%]"
@@ -52,8 +57,11 @@ export const FilterView: FC<ReturnType<typeof useFilterViewModel>> = ({
               <TouchableOpacity
                 className="flex-row items-center py-2"
                 key={`product-category-${id}`}
+                onPress={() => handleCategoryToggle(id)}
               >
                 <Checkbox
+                  value={selectedCategories.includes(id)}
+                  onValueChange={() => handleCategoryToggle(id)}
                   color={colors['purple-base']}
                   className="mr-3 rounded-full"
                 />

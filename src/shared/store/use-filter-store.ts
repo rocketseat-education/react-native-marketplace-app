@@ -9,11 +9,13 @@ export interface FilterState {
 
 interface FilterStore {
   appliedFilterState: FilterState
+  filterState: FilterState
   updateFilter: (props: {
     key: keyof FilterState
     value: string | number | number[]
   }) => void
   resetFilter: () => void
+  applyFilters: () => void
 }
 
 const defaultFilterValues = {
@@ -25,15 +27,24 @@ const defaultFilterValues = {
 
 export const useFilterStore = create<FilterStore>((set) => ({
   appliedFilterState: defaultFilterValues,
+  filterState: defaultFilterValues,
   updateFilter: ({ key, value }) => {
     set((state) => ({
-      appliedFilterState: {
-        ...state.appliedFilterState,
+      filterState: {
+        ...state.filterState,
         [key]: value,
       },
     }))
   },
   resetFilter: () => {
-    set({ appliedFilterState: defaultFilterValues })
+    set({
+      appliedFilterState: defaultFilterValues,
+      filterState: defaultFilterValues,
+    })
+  },
+  applyFilters: () => {
+    set((state) => ({
+      appliedFilterState: state.filterState,
+    }))
   },
 }))
