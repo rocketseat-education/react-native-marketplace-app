@@ -49,4 +49,35 @@ export const cartService = {
       total,
     }
   },
+
+  updateProductQuantity: ({
+    productId,
+    productList,
+    quantity,
+  }: {
+    productId: number
+    productList: CartProduct[]
+    quantity: number
+  }) => {
+    if (quantity <= 0) {
+      return cartService.removeProductFromList(productList, productId)
+    }
+
+    const products = productList.map((product) => {
+      if (product.id === productId) {
+        return { ...product, quantity }
+      } else {
+        return product
+      }
+    })
+    const total = cartService.calculateTotal(products)
+
+    return {
+      products,
+      total,
+    }
+  },
+
+  getItemCount: (productList: CartProduct[]) =>
+    productList.reduce((acc, product) => acc + product.quantity, 0),
 }
