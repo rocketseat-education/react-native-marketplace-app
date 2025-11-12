@@ -16,7 +16,7 @@ export type OmitedProductCard = Omit<CartProduct, 'quantity'>
 interface CartStore {
   products: CartProduct[]
   total: number
-  addItem: (product: OmitedProductCard) => void
+  addProduct: (product: OmitedProductCard) => void
   removeProduct: (productId: number) => void
   updateQuantity: (params: { productId: number; quantity: number }) => void
   clearCart: () => void
@@ -28,7 +28,7 @@ export const useCartStore = create<CartStore>()(
       products: [],
       total: 0,
 
-      addItem: (newProduct) =>
+      addProduct: (newProduct) =>
         set((state) =>
           cartService.addProductToCart(state.products, newProduct),
         ),
