@@ -25,7 +25,6 @@ export const useProductViewModel = (productId: number) => {
   } = useGetProductCommentsInfiniteQuery(productId)
 
   const { addProduct, products } = useCartStore()
-  console.log(products)
 
   const { open, close } = useModalStore()
 
@@ -45,6 +44,16 @@ export const useProductViewModel = (productId: number) => {
     handleLoadMore()
   }
 
+  const onGoToCart = () => {
+    router.push('/(private)/(tabs)/cart')
+    close()
+  }
+
+  const onContinueShopping = () => {
+    router.push('/(private)/(tabs)/home')
+    close()
+  }
+
   const handleAddToCart = () => {
     if (!productDetails) return
 
@@ -58,17 +67,9 @@ export const useProductViewModel = (productId: number) => {
     open(
       createElement(AddToCartSuccessModal, {
         productName: productDetails.name,
-        onGoToCart: () => {
-          router.push('/(private)/(tabs)/cart')
-          close()
-        },
-        onClose: () => {
-          close()
-        },
-        onContinueShopping: () => {
-          router.push('/(private)/(tabs)/home')
-          close()
-        },
+        onGoToCart,
+        onClose: close,
+        onContinueShopping,
       }),
     )
   }
