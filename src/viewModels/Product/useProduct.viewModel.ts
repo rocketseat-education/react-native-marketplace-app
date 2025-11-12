@@ -2,9 +2,11 @@ import { router } from 'expo-router'
 import { createElement } from 'react'
 import { useGetProductCommentsInfiniteQuery } from '../../shared/queries/product/use-get-product-comments-infinite-query'
 import { useGetProductDetails } from '../../shared/queries/product/use-get-product-details'
+import { useBottomSheetStore } from '../../shared/store/bottomsheet-store'
 import { useCartStore } from '../../shared/store/cart-store'
 import { useModalStore } from '../../shared/store/modal-store'
 import { AddToCartSuccessModal } from './components/AddToCartSuccessModal'
+import { ReviewBottomSheet } from './components/ReviewBottomSheet'
 
 export const useProductViewModel = (productId: number) => {
   const {
@@ -25,6 +27,8 @@ export const useProductViewModel = (productId: number) => {
   } = useGetProductCommentsInfiniteQuery(productId)
 
   const { addProduct, products } = useCartStore()
+
+  const { open: openBottomSheet } = useBottomSheetStore()
 
   const { open, close } = useModalStore()
 
@@ -74,6 +78,14 @@ export const useProductViewModel = (productId: number) => {
     )
   }
 
+  const handleOpenReviewBottomSheet = () => {
+    if (!productDetails) return
+
+    openBottomSheet({
+      content: createElement(ReviewBottomSheet, { productId }),
+    })
+  }
+
   return {
     isLoading,
     productDetails,
@@ -87,5 +99,6 @@ export const useProductViewModel = (productId: number) => {
     isRefetching,
     isFetchingNextPage,
     handleAddToCart,
+    handleOpenReviewBottomSheet,
   }
 }
