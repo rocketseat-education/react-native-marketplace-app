@@ -12,8 +12,6 @@ interface HeaderParams {
 }
 
 export const Header: FC<HeaderParams> = ({ productDetails }) => {
-  console.log({ productDetails })
-
   return (
     <>
       <View className="pb-5 items-start">
@@ -96,7 +94,7 @@ export const Header: FC<HeaderParams> = ({ productDetails }) => {
           </Text>
         </View>
 
-        <View className="flex-row items-center justify-between py-4 border-t border-gray-200">
+        <View className="flex-row items-center justify-between pt-4 border-t border-gray-200">
           <Text className="text-base font-bold text-gray-800">Avaliações</Text>
 
           <TouchableOpacity>
