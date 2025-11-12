@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { FlatList, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { Header } from './components/Header'
 import { useProductViewModel } from './useProduct.viewModel'
 
 export const ProductView: FC<ReturnType<typeof useProductViewModel>> = ({
@@ -12,16 +13,17 @@ export const ProductView: FC<ReturnType<typeof useProductViewModel>> = ({
     return <Text>Houve um erro ao carregar os detalhes do produto</Text>
   }
 
+  if (!productDetails) {
+    return null
+  }
+
   return (
     <SafeAreaView>
       <FlatList
         data={[]}
         renderItem={() => <></>}
-        ListHeaderComponent={() => (
-          <>
-            <Text>{productDetails?.name}</Text>
-          </>
-        )}
+        ListHeaderComponent={() => <Header productDetails={productDetails} />}
+        className="px-6"
       />
     </SafeAreaView>
   )
