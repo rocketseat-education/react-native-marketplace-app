@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { AddToCardFooter } from './components/AddToCardFooter'
 import { CommentItem } from './components/CommentItem'
 import { EmptyList } from './components/EmptyList'
 import { ProductError } from './components/Error'
@@ -27,7 +28,7 @@ export const ProductView: FC<ReturnType<typeof useProductViewModel>> = ({
   if (isLoading || !productDetails) return <Loading />
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView edges={['top']} className="flex-1 bg-background">
       <FlatList
         data={comments}
         renderItem={({ item }) => <CommentItem comment={item} />}
@@ -40,7 +41,9 @@ export const ProductView: FC<ReturnType<typeof useProductViewModel>> = ({
           <ListFooter isLoadingMore={isFetchingNextPage} />
         )}
         ListEmptyComponent={<EmptyList isLoadingComments={isLoadingComments} />}
+        contentContainerClassName="pb-6"
       />
+      <AddToCardFooter product={productDetails} />
     </SafeAreaView>
   )
 }
