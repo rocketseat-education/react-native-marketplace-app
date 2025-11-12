@@ -8,7 +8,15 @@ export const ProductView: FC<ReturnType<typeof useProductViewModel>> = ({
   isLoading,
   productDetails,
   error,
+  comments,
+  isLoadingComments,
+  errorComments,
+  handleLoadMore,
+  handleRefetch,
+  handleEndReached,
 }) => {
+  console.log(comments)
+
   if (error) {
     return <Text>Houve um erro ao carregar os detalhes do produto</Text>
   }
