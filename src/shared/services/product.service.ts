@@ -66,6 +66,8 @@ export const getUserComment = async (productId: number) => {
     rating: number
   }>(`/products/${productId}/user-comment`)
 
+  console.log(data)
+
   return data
 }
 
