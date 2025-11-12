@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { buildImageUrl } from '../../helpers/buildImageUrl'
+import { ProductComment } from '../../interfaces/product-comment'
 import { getProductComments } from '../../services/product.service'
 
 export const useGetProductCommentsInfiniteQuery = (productId: number) => {
@@ -20,7 +21,7 @@ export const useGetProductCommentsInfiniteQuery = (productId: number) => {
   })
 
   const comments =
-    query.data?.pages
+    (query.data?.pages
       .flatMap((page) => page.data)
       .map((comment) => ({
         ...comment,
@@ -28,7 +29,7 @@ export const useGetProductCommentsInfiniteQuery = (productId: number) => {
           ...comment.user,
           avatar: buildImageUrl(comment.user.avatar?.url ?? ''),
         },
-      })) ?? []
+      })) as ProductComment[]) ?? []
 
   return {
     ...query,
