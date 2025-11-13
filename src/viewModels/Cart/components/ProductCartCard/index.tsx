@@ -17,7 +17,9 @@ export const ProductCartCard: FC<ProductCartCardProps> = ({ product }) => {
         resizeMode="cover"
       />
       <View className="flex-1 mr-3 gap-1">
-        <Text className="text-sm text-gray-400">{product.name}</Text>
+        <Text className="text-sm text-gray-400 line-clamp-1 max-w-[180px]">
+          {product.name}
+        </Text>
 
         <AppPriceText
           classNameCurrency="text-sm font-bold"
