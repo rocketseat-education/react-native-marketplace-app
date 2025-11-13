@@ -1,11 +1,16 @@
 import { Ionicons } from '@expo/vector-icons'
+import { FC } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { AppButton } from '../../../../shared/components/AppButton'
 import { AppPriceText } from '../../../../shared/components/AppPriceText'
 import { useCartStore } from '../../../../shared/store/cart-store'
 import { colors } from '../../../../styles/colors'
 
-export const CartFooter = () => {
+interface CartFooterParams {
+  openCartBottomSheet: () => void
+}
+
+export const CartFooter: FC<CartFooterParams> = ({ openCartBottomSheet }) => {
   const { total } = useCartStore()
 
   return (
@@ -27,7 +32,10 @@ export const CartFooter = () => {
             Cartões de crédito
           </Text>
 
-          <TouchableOpacity className="flex-row items-center">
+          <TouchableOpacity
+            onPress={openCartBottomSheet}
+            className="flex-row items-center"
+          >
             <Ionicons
               name="card-outline"
               size={20}
