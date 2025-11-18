@@ -12,6 +12,7 @@ import { AppPriceText } from '../../../../shared/components/AppPriceText'
 import { CreditCard } from '../../../../shared/interfaces/credit-card'
 import { useCartStore } from '../../../../shared/store/cart-store'
 import { colors } from '../../../../styles/colors'
+import { CreditCardItem } from '../CreditCardItem'
 
 interface CartFooterParams {
   openCartBottomSheet: () => void
@@ -70,8 +71,9 @@ export const CartFooter: FC<CartFooterParams> = ({
         ) : (
           <FlatList
             data={creditCards}
-            renderItem={({ item }) => <Text>{item.titularName}</Text>}
+            renderItem={({ item }) => <CreditCardItem creditCard={item} />}
             keyExtractor={(item) => `credit-card-id-${item.id}`}
+            className="gap-2"
           />
         )}
 
