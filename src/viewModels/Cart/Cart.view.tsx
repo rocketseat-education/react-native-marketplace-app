@@ -14,7 +14,7 @@ export const CartView: FC<ReturnType<typeof useCartViewModel>> = ({
   isLoadingCreditCards,
 }) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView className="flex-1">
       <FlatList
         contentContainerClassName="px-6"
         data={products}
