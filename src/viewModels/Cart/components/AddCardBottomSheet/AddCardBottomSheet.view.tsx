@@ -8,7 +8,7 @@ import { useAddCardBottomSheetViewModel } from './useAddCardBottomSheet.viewMode
 
 export const AddCardBottomSheetView: FC<
   ReturnType<typeof useAddCardBottomSheetViewModel>
-> = () => {
+> = ({ handleCreateCreditCard }) => {
   return (
     <ScrollView className="flex-1">
       <View className="p-8">
