@@ -1,4 +1,4 @@
-export interface GetCreditCardsResponse {
+export interface CreditCard {
   id: number
   userId: number
   titularName: string
