@@ -9,7 +9,12 @@ import { useAddCardBottomSheetViewModel } from './useAddCardBottomSheet.viewMode
 
 export const AddCardBottomSheetView: FC<
   ReturnType<typeof useAddCardBottomSheetViewModel>
-> = ({ handleCreateCreditCard, control }) => {
+> = ({
+  handleCreateCreditCard,
+  control,
+  expirationDateMask,
+  cardNumberMask,
+}) => {
   return (
     <ScrollView className="flex-1">
       <View className="p-8">
@@ -37,6 +42,8 @@ export const AddCardBottomSheetView: FC<
             label="NÚMERO"
             placeholder="Número do cartão"
             keyboardType="numeric"
+            mask={cardNumberMask}
+            maxLength={19}
           />
           <View className="flex-row gap-4">
             <View className="flex-1">
@@ -48,6 +55,7 @@ export const AddCardBottomSheetView: FC<
                 placeholder="MM/AA"
                 keyboardType="numeric"
                 maxLength={5}
+                mask={expirationDateMask}
               />
             </View>
             <View className="flex-1">

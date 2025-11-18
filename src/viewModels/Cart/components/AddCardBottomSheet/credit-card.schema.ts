@@ -13,7 +13,7 @@ export const creditCardSchema = yup.object().shape({
       'Número do cartão deve ter exatamente 16 dígitos',
       (value) => {
         if (!value) return false
-        const cleaned = value.replace(/\s/g, '')
+        const cleaned = value.replace(/\D/g, '')
         return /^\d{16}$/.test(cleaned)
       },
     ),
