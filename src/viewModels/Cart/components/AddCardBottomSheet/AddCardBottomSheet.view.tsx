@@ -3,12 +3,13 @@ import { FC } from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { AppButton } from '../../../../shared/components/AppButton'
 import { AppInput } from '../../../../shared/components/AppInput'
+import { AppInputController } from '../../../../shared/components/AppInputController'
 import { colors } from '../../../../styles/colors'
 import { useAddCardBottomSheetViewModel } from './useAddCardBottomSheet.viewModel'
 
 export const AddCardBottomSheetView: FC<
   ReturnType<typeof useAddCardBottomSheetViewModel>
-> = ({ handleCreateCreditCard }) => {
+> = ({ handleCreateCreditCard, control }) => {
   return (
     <ScrollView className="flex-1">
       <View className="p-8">
@@ -22,14 +23,26 @@ export const AddCardBottomSheetView: FC<
         </View>
 
         <View className="mt-6 gap-4">
-          <AppInput
+          <AppInputController
+            control={control}
+            name="titularName"
             leftIcon="person-outline"
             label="NOME DO TITULAR"
             placeholder="Nome completo"
           />
+          <AppInputController
+            control={control}
+            name="number"
+            leftIcon="card-outline"
+            label="NÚMERO"
+            placeholder="Número do cartão"
+            keyboardType="numeric"
+          />
           <View className="flex-row gap-4">
             <View className="flex-1">
-              <AppInput
+              <AppInputController
+                control={control}
+                name="expirationDate"
                 leftIcon="calendar-outline"
                 label="VENCIMENTO"
                 placeholder="MM/AA"
@@ -38,7 +51,9 @@ export const AddCardBottomSheetView: FC<
               />
             </View>
             <View className="flex-1">
-              <AppInput
+              <AppInputController
+                control={control}
+                name="CVV"
                 leftIcon="lock-closed-outline"
                 label="CVV"
                 placeholder="000"
