@@ -1,8 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useCreateCreditCardMutation } from '../../../../shared/queries/credit-cards/use-create-credit-card.mutatio'
 import { useBottomSheetStore } from '../../../../shared/store/bottomsheet-store'
 import { CreditCardFormData, creditCardSchema } from './credit-card.schema'
+
+export type FocusedField = 'number' | 'name' | 'expiry' | 'cvv'
 
 const formatExpirationDateFormApi = (
   dateString: string,
@@ -31,6 +34,9 @@ const formatExpirationDateFormApi = (
 
 export const useAddCardBottomSheetViewModel = () => {
   const createCreditCardMutation = useCreateCreditCardMutation()
+  const [focusedField, setFocusedField] = useState<FocusedField | null>(null)
+
+  const blurTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const { control, handleSubmit, reset, watch, clearErrors, setError } =
     useForm<CreditCardFormData>({
@@ -52,12 +58,6 @@ export const useAddCardBottomSheetViewModel = () => {
         (message) => setError('expirationDate', { message }),
       )
       const cleanedNumber = number.replace(/\D/g, '')
-
-      console.log({
-        expirationDate,
-        CVV,
-        cleanedNumber,
-      })
 
       await createCreditCardMutation.mutate({
         CVV: Number(CVV),
@@ -89,10 +89,31 @@ export const useAddCardBottomSheetViewModel = () => {
     return cleaned.replace(/(\d{4})(?=\d)/g, '$1 ').trim()
   }
 
+  const handleFieldFocus = (field: FocusedField) => {
+    console.log(field)
+    if (blurTimeoutRef.current) {
+      clearTimeout(blurTimeoutRef.current)
+    }
+
+    setFocusedField(field)
+  }
+
+  const handleFieldBlur = () => {
+    blurTimeoutRef.current = setTimeout(() => {
+      setFocusedField(null)
+    }, 50)
+  }
+
+  const isFlipped = focusedField === 'cvv'
+
   return {
     handleCreateCreditCard,
     control,
     expirationDateMask,
     cardNumberMask,
+    isFlipped,
+    handleFieldFocus,
+    handleFieldBlur,
+    focusedField,
   }
 }

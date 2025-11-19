@@ -1,3 +1,3 @@
-export const useCreditCardViewModel = () => {
+export const useCreditCardViewModel = (isFlipped: boolean) => {
   return {}
 }

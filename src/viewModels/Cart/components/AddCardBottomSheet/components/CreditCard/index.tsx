@@ -1,8 +1,18 @@
+import { FC } from 'react'
+import { FocusedField } from '../../useAddCardBottomSheet.viewModel'
 import { CreditCardView } from './CreditCard.view'
 import { useCreditCardViewModel } from './useCreditCard.viewModel'
 
-export const CreditCard = () => {
-  const viewModel = useCreditCardViewModel()
+interface CreditCardParams {
+  isFlipped: boolean
+  focusedField: FocusedField | null
+}
 
-  return <CreditCardView {...viewModel} />
+export const CreditCard: FC<CreditCardParams> = ({
+  isFlipped,
+  focusedField,
+}) => {
+  const viewModel = useCreditCardViewModel(isFlipped)
+
+  return <CreditCardView focusedField={focusedField} {...viewModel} />
 }
