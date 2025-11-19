@@ -4,8 +4,8 @@ export interface UpdateProfileParams {
   name: string
   email: string
   phone: string
+  password?: string
   newPassword?: string
-  confirmNewPassword?: string
 }
 
 export interface UpdateProfileResponse {

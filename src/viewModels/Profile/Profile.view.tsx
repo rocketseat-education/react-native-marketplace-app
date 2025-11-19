@@ -11,6 +11,7 @@ export const ProfileView: FC<ReturnType<typeof useProfileViewModel>> = ({
   control,
   onSubmit,
   avatarUri,
+  isSubmitting,
 }) => {
   return (
     <KeyboardContainer>
@@ -75,7 +76,9 @@ export const ProfileView: FC<ReturnType<typeof useProfileViewModel>> = ({
           secureTextEntry
         />
 
-        <AppButton className="mt-6">Atualizar cadastro</AppButton>
+        <AppButton className="mt-6" onPress={onSubmit} isLoading={isSubmitting}>
+          Atualizar cadastro
+        </AppButton>
       </ScrollView>
     </KeyboardContainer>
   )
