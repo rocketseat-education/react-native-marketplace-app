@@ -16,9 +16,9 @@ export const useProfileViewModel = () => {
   } = useForm<ProfileFormData>({
     resolver: yupResolver(profileScheme),
     defaultValues: {
-      name: '',
-      email: '',
-      phone: '',
+      name: user?.name ?? '',
+      email: user?.email ?? '',
+      phone: user?.phone ?? '',
       newPassword: undefined,
       confirmNewPassword: undefined,
     },
