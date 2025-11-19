@@ -7,8 +7,8 @@ import { AppButton } from '../../AppButton'
 export interface SuccessModalParams {
   title: string
   message?: string
-  buttonText: string
-  onButtonPress: () => void
+  buttonText?: string
+  onButtonPress?: () => void
 }
 
 export const SuccessModal: FC<SuccessModalParams> = ({
