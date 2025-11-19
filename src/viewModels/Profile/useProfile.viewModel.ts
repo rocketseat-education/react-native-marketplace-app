@@ -1,7 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { CameraType } from 'expo-image-picker'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useAppModal } from '../../shared/hooks/useAppModal'
+import { useImage } from '../../shared/hooks/useImage'
+import { useUploadAvatarMutation } from '../../shared/queries/auth/use-upload-avatar.mutation'
 import { useUpdateProfileMutation } from '../../shared/queries/profile/use-update-profile.mutation'
 import { useCartStore } from '../../shared/store/cart-store'
 import { useModalStore } from '../../shared/store/modal-store'
@@ -10,13 +13,20 @@ import { ProfileFormData, profileScheme } from './profile.scheme'
 
 export const useProfileViewModel = () => {
   const { user, logout } = useUserStore()
-  const [avatarUri, setAvatarUri] = useState<string | null>(
-    user?.avatarUrl ?? null,
-  )
+
+  const uploadAvatarMutation = useUploadAvatarMutation()
 
   const { showSelection } = useAppModal()
   const { close } = useModalStore()
   const { clearCart } = useCartStore()
+  const { isLoading, handleSelectImage } = useImage({
+    callback: async (url) => {
+      if (url) {
+        await uploadAvatarMutation.mutateAsync(url)
+      }
+    },
+    cameraType: CameraType.front,
+  })
 
   const updateProfileMutation = useUpdateProfileMutation()
   const {
@@ -68,10 +78,19 @@ export const useProfileViewModel = () => {
           onPress: () => {
             clearCart()
             logout()
+            close()
           },
         },
       ],
     })
 
-  return { control, onSubmit, avatarUri, isSubmitting, handleLogout }
+  return {
+    control,
+    onSubmit,
+    avatarUri: user?.avatarUrl ?? null,
+    isSubmitting,
+    handleLogout,
+    handleSelectImage,
+    isLoading,
+  }
 }
