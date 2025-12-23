@@ -1,7 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { CameraType } from 'expo-image-picker'
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { baseURL } from '../../shared/api/market-place'
+import { buildImageUrl } from '../../shared/helpers/buildImageUrl'
 import { useAppModal } from '../../shared/hooks/useAppModal'
 import { useImage } from '../../shared/hooks/useImage'
 import { useUploadAvatarMutation } from '../../shared/queries/auth/use-upload-avatar.mutation'
@@ -32,7 +33,7 @@ export const useProfileViewModel = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<ProfileFormData>({
     resolver: yupResolver(profileScheme),
     defaultValues: {
@@ -84,10 +85,20 @@ export const useProfileViewModel = () => {
       ],
     })
 
+  const getAvatarUri = () => {
+    if (!user?.avatarUrl) return null
+
+    const fullUrl = user.avatarUrl.startsWith('/')
+      ? `${baseURL}${user.avatarUrl}`
+      : user.avatarUrl
+
+    return buildImageUrl(fullUrl)
+  }
+
   return {
     control,
     onSubmit,
-    avatarUri: user?.avatarUrl ?? null,
+    avatarUri: getAvatarUri(),
     isSubmitting,
     handleLogout,
     handleSelectImage,

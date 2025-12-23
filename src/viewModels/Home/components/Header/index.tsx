@@ -1,11 +1,25 @@
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { baseURL } from '../../../../shared/api/market-place'
+import { buildImageUrl } from '../../../../shared/helpers/buildImageUrl'
 import { useUserStore } from '../../../../shared/store/user-store'
 import { colors } from '../../../../styles/colors'
 
 export const HomeHeader = () => {
   const { user } = useUserStore()
+
+  const getAvatarUri = () => {
+    if (!user?.avatarUrl) return null
+
+    const fullUrl = user.avatarUrl.startsWith('/')
+      ? `${baseURL}${user.avatarUrl}`
+      : user.avatarUrl
+
+    return buildImageUrl(fullUrl)
+  }
+
+  const avatarUri = getAvatarUri()
 
   return (
     <View>
@@ -14,9 +28,9 @@ export const HomeHeader = () => {
         className="flex-row items-center gap-6"
       >
         <View className="relative">
-          {user?.avatarUrl ? (
+          {avatarUri ? (
             <Image
-              source={{ uri: user?.avatarUrl }}
+              source={{ uri: avatarUri }}
               className="size-[56px] rounded-xl border-shape"
             />
           ) : (
