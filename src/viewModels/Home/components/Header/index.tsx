@@ -1,7 +1,6 @@
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
-import { baseURL } from '../../../../shared/api/market-place'
 import { buildImageUrl } from '../../../../shared/helpers/buildImageUrl'
 import { useUserStore } from '../../../../shared/store/user-store'
 import { colors } from '../../../../styles/colors'
@@ -11,12 +10,7 @@ export const HomeHeader = () => {
 
   const getAvatarUri = () => {
     if (!user?.avatarUrl) return null
-
-    const fullUrl = user.avatarUrl.startsWith('/')
-      ? `${baseURL}${user.avatarUrl}`
-      : user.avatarUrl
-
-    return buildImageUrl(fullUrl)
+    return buildImageUrl(user.avatarUrl)
   }
 
   const avatarUri = getAvatarUri()

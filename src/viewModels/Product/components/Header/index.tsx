@@ -30,7 +30,7 @@ export const Header: FC<HeaderParams> = ({
       <View className="w-full rounded-lg shadow-xl shadow-gray-500/30 bg-white">
         <Image
           source={{
-            uri: productDetails.photo,
+            uri: buildImageUrl(productDetails.photo),
           }}
           className="w-full rounded-lg h-[192px]"
         />

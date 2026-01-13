@@ -1,7 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { CameraType } from 'expo-image-picker'
 import { useForm } from 'react-hook-form'
-import { baseURL } from '../../shared/api/market-place'
 import { buildImageUrl } from '../../shared/helpers/buildImageUrl'
 import { useAppModal } from '../../shared/hooks/useAppModal'
 import { useImage } from '../../shared/hooks/useImage'
@@ -87,12 +86,7 @@ export const useProfileViewModel = () => {
 
   const getAvatarUri = () => {
     if (!user?.avatarUrl) return null
-
-    const fullUrl = user.avatarUrl.startsWith('/')
-      ? `${baseURL}${user.avatarUrl}`
-      : user.avatarUrl
-
-    return buildImageUrl(fullUrl)
+    return buildImageUrl(user.avatarUrl)
   }
 
   return {

@@ -3,6 +3,7 @@ import { router } from 'expo-router'
 import { FC } from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { AppPriceText } from '../../../../shared/components/AppPriceText'
+import { buildImageUrl } from '../../../../shared/helpers/buildImageUrl'
 import { ProductInterface } from '../../../../shared/interfaces/product'
 import { colors } from '../../../../styles/colors'
 import { useProductCardViewModel } from './useProductCard.viewModel'
@@ -17,7 +18,7 @@ export const ProductCardView: FC<
     >
       <View>
         <Image
-          source={{ uri: product.photo }}
+          source={{ uri: buildImageUrl(product.photo) }}
           className="w-full h-[96px] rounded-md"
           resizeMode="cover"
         />
