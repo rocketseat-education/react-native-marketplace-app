@@ -42,7 +42,7 @@ const setupNotificationChannel = async () => {
   }
 }
 
-interface ScheduleCartReminderInterface {
+interface ScheduleProductInterface {
   productName: string
   productId: number
   delayInMinutes: number
@@ -52,7 +52,7 @@ const scheduleCartReminder = async ({
   productName,
   productId,
   delayInMinutes,
-}: ScheduleCartReminderInterface) => {
+}: ScheduleProductInterface) => {
   const hasPermission = await requestPermissions()
 
   if (!hasPermission) {
@@ -60,7 +60,7 @@ const scheduleCartReminder = async ({
     return
   }
 
-  const notification = await Notifications.scheduleNotificationAsync({
+  await Notifications.scheduleNotificationAsync({
     identifier: NOTIFICATION_IDS.CART_REMINDER,
     content: {
       title: 'Você esqueceu algo no carrinho!',
@@ -72,15 +72,45 @@ const scheduleCartReminder = async ({
     },
     trigger: {
       type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
-      seconds: delayInMinutes,
+      seconds: delayInMinutes * 60,
+    },
+  })
+}
+
+const scheduleFeedbackNotification = async ({
+  productName,
+  productId,
+  delayInMinutes,
+}: ScheduleProductInterface) => {
+  const hasPermission = await requestPermissions()
+
+  if (!hasPermission) {
+    console.log('[LocalNotifications] - Permission not granted')
+    return
+  }
+
+  await Notifications.scheduleNotificationAsync({
+    identifier: `${NOTIFICATION_IDS.PURCHASE_FEEDBACK}-${productId}`,
+    content: {
+      title: '⭐️ Como foi a sua compra?',
+      body: `Você realizou o pedido do produto "${productName}". Envie um feedback do que achou do produto!`,
+      data: {
+        type: 'purchase_feedback',
+        productId: String(productId),
+      },
+    },
+    trigger: {
+      type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+      seconds: delayInMinutes * 60,
     },
   })
 
-  return notification
+  console.log('[LocalNotifications] - Feedback notification scheduled')
 }
 
 export const localNotificationsService = {
   scheduleCartReminder,
   requestPermissions,
   setupNotificationChannel,
+  scheduleFeedbackNotification,
 }

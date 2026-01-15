@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useAppModal } from '../../../../shared/hooks/useAppModal'
 import { CreditCard } from '../../../../shared/interfaces/credit-card'
 import { useSubmitOrderMutation } from '../../../../shared/queries/orders/use-submit-order.mutation'
+import { localNotificationsService } from '../../../../shared/services/local-notifications.service'
 import { useCartStore } from '../../../../shared/store/cart-store'
 
 export const useCartFooterViewModel = () => {
@@ -19,6 +20,24 @@ export const useCartFooterViewModel = () => {
     await createOrderMutation.mutateAsync({
       creditCardId: selectedCreditCard.id,
       items: products.map(({ id, quantity }) => ({ productId: id, quantity })),
+    })
+
+    const firstProduct = products[0]
+
+    if (firstProduct) {
+      localNotificationsService.scheduleFeedbackNotification({
+        delayInMinutes: 60,
+        productId: firstProduct.id,
+        productName: firstProduct.name,
+      })
+    }
+
+    products.forEach(({ id, name }, index) => {
+      localNotificationsService.scheduleFeedbackNotification({
+        delayInMinutes: 60 * (index + 1),
+        productId: id,
+        productName: name,
+      })
     })
 
     clearCart()
