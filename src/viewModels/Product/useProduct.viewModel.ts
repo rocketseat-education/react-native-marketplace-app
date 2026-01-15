@@ -2,6 +2,7 @@ import { router } from 'expo-router'
 import { createElement } from 'react'
 import { useGetProductCommentsInfiniteQuery } from '../../shared/queries/product/use-get-product-comments-infinite-query'
 import { useGetProductDetails } from '../../shared/queries/product/use-get-product-details'
+import { localNotificationsService } from '../../shared/services/local-notifications.service'
 import { useBottomSheetStore } from '../../shared/store/bottomsheet-store'
 import { useCartStore } from '../../shared/store/cart-store'
 import { useModalStore } from '../../shared/store/modal-store'
@@ -66,6 +67,12 @@ export const useProductViewModel = (productId: number) => {
       name: productDetails.name,
       price: productDetails.value,
       image: productDetails.photo,
+    })
+
+    localNotificationsService.scheduleCartReminder({
+      delayInMinutes: 30,
+      productId: productDetails.id,
+      productName: productDetails.name,
     })
 
     open(

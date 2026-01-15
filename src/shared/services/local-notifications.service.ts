@@ -28,3 +28,43 @@ const setupNotificationChannel = async () => {
     })
   }
 }
+
+interface ScheduleCartReminderInterface {
+  productName: string
+  productId: number
+  delayInMinutes: number
+}
+
+const scheduleCartReminder = async ({
+  productName,
+  productId,
+  delayInMinutes,
+}: ScheduleCartReminderInterface) => {
+  const hasPermission = await Notifications.requestPermissionsAsync()
+
+  if (hasPermission.status !== 'granted') return
+
+  await setupNotificationChannel()
+
+  const notification = await Notifications.scheduleNotificationAsync({
+    identifier: NOTIFICATION_IDS.CART_REMINDER,
+    content: {
+      title: 'Você esqueceu algo no carrinho!',
+      body: `O produto ${productName} está esperando por você. Finalize sua compra agora!`,
+      data: {
+        type: 'cart_reminder',
+        productId: String(productId),
+      },
+    },
+    trigger: {
+      type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+      seconds: delayInMinutes,
+    },
+  })
+
+  return notification
+}
+
+export const localNotificationsService = {
+  scheduleCartReminder,
+}
