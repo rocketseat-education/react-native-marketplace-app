@@ -100,7 +100,7 @@ const scheduleFeedbackNotification = async ({
       data: {
         type: 'purchase_feedback',
         productId: String(productId),
-        deepLink: `${DEEP_LINK}product/${productId}`,
+        deepLink: `${DEEP_LINK}product/${productId}?openFeedbackBottomSheet=true`,
       },
     },
     trigger: {
