@@ -33,6 +33,10 @@ export const useCartFooterViewModel = () => {
     }
 
     products.forEach(({ id, name }, index) => {
+      localNotificationsService.cancelNotifications(
+        `${localNotificationsService.NOTIFICATION_IDS.CART_REMINDER}-${id}`,
+      )
+
       localNotificationsService.scheduleFeedbackNotification({
         delayInMinutes: 60 * (index + 1),
         productId: id,
