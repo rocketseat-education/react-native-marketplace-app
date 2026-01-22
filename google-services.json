@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1011164521316",
+    "project_id": "market-place-push-notification",
+    "storage_bucket": "market-place-push-notification.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011164521316:android:ee631f3ff364352f6b5071",
+        "android_client_info": {
+          "package_name": "com.arthurrios.marketplaceapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXcd7mAs3afQW_tCyw3zkctj98XXKk3CQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
