@@ -4,3 +4,10 @@ export interface Favorite {
   product: string
   createdAt: string
 }
+
+export interface AddFavoriteResponse {
+  id: number
+  productId: number
+  userId: number
+  createdAt: string
+}
