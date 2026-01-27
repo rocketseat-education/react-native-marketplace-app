@@ -6,6 +6,7 @@ import { AppPriceText } from '../../../../shared/components/AppPriceText'
 import { buildImageUrl } from '../../../../shared/helpers/buildImageUrl'
 import { GetProductDetailsInterface } from '../../../../shared/interfaces/http/product-detail'
 import { colors } from '../../../../styles/colors'
+import { FavoriteButton } from './components/FavoriteButton'
 
 interface HeaderParams {
   productDetails: GetProductDetailsInterface
@@ -18,14 +19,15 @@ export const Header: FC<HeaderParams> = ({
 }) => {
   return (
     <>
-      <View className="pb-5 items-start">
+      <View className="pb-5 items-start justify-between flex-row">
         <TouchableOpacity
           onPress={router.back}
-          className="w-full justify-start flex-row items-center gap-3"
+          className="justify-start flex-row items-center gap-3"
         >
           <Ionicons name="arrow-back" size={24} color={colors['purple-base']} />
           <Text className="text-base font-bold text-purple-base">Voltar</Text>
         </TouchableOpacity>
+        <FavoriteButton productId={productDetails.id} />
       </View>
       <View className="w-full rounded-lg shadow-xl shadow-gray-500/30 bg-white">
         <Image
